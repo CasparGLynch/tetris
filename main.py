@@ -1,5 +1,9 @@
 import pygame.time
 
+from defs import background_color, screen_width, screen_height
+from windows.GameWindow import GameWindow
+from windows.MainMenuWindow import MainMenuWindow
+
 
 class Main:
     """
@@ -14,18 +18,19 @@ class Main:
 
         # all the windows that the main loop will switch between
         # Todo: Add the classes
-        self.windows = {'main_menu': None,
-                        'game_window': None}
+        self.windows = {'main_menu': MainMenuWindow,
+                        'game_window': GameWindow}
 
         # first window is main menu
-        self.current_window = self.windows['main_menu']
+        self.current_window = self.windows['main_menu']()
 
         # pygame screen and display initialising
-        self.screen = pygame.display.set_mode(size=(300, 600))
+        self.screen = pygame.display.set_mode(size=(screen_width, screen_height))
         self.display = pygame.display
         self.display.set_caption('Simple Tetris')
 
     def run(self):
+        self.screen.fill(background_color)
         self.display.flip()
         while self.is_running:
             self.clock.tick(self.__frame_rate)
@@ -34,14 +39,17 @@ class Main:
                 if event.type == pygame.QUIT:
                     self.is_running = False
                 # screen event handling
-                self.current_window.key_updates()
+                self.current_window.key_updates(event=event)
             # screen timing based updates
             self.current_window.time_updates()
 
             # loop to update all areas that require it in screen
-            for updatable_object in self.current_window.display():
-                # Todo write actual update logic
-                pass
+            for element in self.current_window.display():
+                rect = element.rect
+                surface = element.surface
+                self.screen.fill(background_color, rect)
+                self.screen.blit(surface, (rect.x, rect.y))
+                self.display.update(rect)
 
         else:
             print('Main game loop exited')
