@@ -5,10 +5,11 @@ from utils.Position import Position
 
 
 class Object:
-    def __init__(self, position: Position, surface: Surface, rect: Rect):
+    def __init__(self, position: Position, surface: Surface, rect: Rect, update: bool):
         self.position = position
         self.surface = surface
         self.rect = rect
+        self.update = update
 
     def update_rect_same_position(self) -> None:
         """

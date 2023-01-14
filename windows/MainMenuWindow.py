@@ -21,7 +21,6 @@ class MainMenuWindow(Window):
             center=True
         )
         self.screen_rects.append(main_menu)
-        self.to_be_updated.append(main_menu)
 
     def key_updates(self, event: Event):
         pass
@@ -30,4 +29,7 @@ class MainMenuWindow(Window):
         pass
 
     def display(self) -> List[Object]:
-        return self.to_be_updated
+        to_be_updated = [x for x in self.screen_rects if x.update]
+        for i in self.screen_rects:
+            i.update = False
+        return to_be_updated
