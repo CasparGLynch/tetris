@@ -11,3 +11,5 @@ number_of_mines = {
     'expert': 150,
     'insane': 400
 }
+
+SWITCH_TO_GAME = 0

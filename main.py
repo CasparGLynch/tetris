@@ -1,5 +1,6 @@
 import pygame.time
 
+import defs
 from defs import background_color, screen_width, screen_height
 from windows.GameWindow import GameWindow
 from windows.MainMenuWindow import MainMenuWindow
@@ -34,10 +35,9 @@ class Main:
                 if event.type == pygame.QUIT:
                     self.is_running = False
                 # screen event handling
-                event = self.current_window.key_updates(event=event)
-                if event is not None:
-                    self.screen.fill(background_color)
-                    self.current_window = GameWindow()
+                self.handle_event(self.current_window.key_updates(event=event))
+
+
             # screen timing based updates
             self.current_window.time_updates()
 
@@ -51,6 +51,13 @@ class Main:
 
         else:
             print('Main game loop exited')
+
+    def handle_event(self, event_code):
+        if event_code is None:
+            return
+        if event_code == defs.SWITCH_TO_GAME:
+            self.current_window = GameWindow()
+            self.screen.fill(defs.background_color)
 
 
 if __name__ == '__main__':

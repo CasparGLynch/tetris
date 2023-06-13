@@ -1,10 +1,13 @@
+# Python
 from typing import List
 
+# Pygame
 import pygame
 from pygame.event import Event
 
+# Tetris
+import defs
 from defs import screen_width, screen_height
-from events.Switch import Switch
 from objects.Object import Object
 from objects.TextBoxObject import TextBoxObject
 from utils.Position import Position
@@ -33,7 +36,7 @@ class MainMenuWindow(Window):
         # window specific updates
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                return Switch()
+                return defs.SWITCH_TO_GAME
 
     def time_updates(self):
         pass
