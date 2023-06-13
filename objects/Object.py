@@ -30,3 +30,6 @@ class Object:
         new_rect.y = new_position.y
 
         self.rect = new_rect
+
+    def handle_key(self, key):
+        raise NotImplemented()

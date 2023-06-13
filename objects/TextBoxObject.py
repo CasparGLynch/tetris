@@ -8,6 +8,7 @@ from utils.Position import Position
 
 
 class TextBoxObject(Object):
+    is_interactive = False
     def __init__(self, position: Position, text: str, size: int, center=False):
         self.font = pygame.font.Font(game_font, size)
         text_surface = self.font.render(text, True, text_color)

@@ -1,8 +1,10 @@
 from typing import List
 
+import pygame
 from pygame.event import Event
 
 from defs import screen_width, screen_height
+from events.Switch import Switch
 from objects.Object import Object
 from objects.TextBoxObject import TextBoxObject
 from utils.Position import Position
@@ -23,7 +25,15 @@ class MainMenuWindow(Window):
         self.screen_rects.append(main_menu)
 
     def key_updates(self, event: Event):
-        pass
+        # check for the rects on screem
+        objects_to_update = [_rect for _rect in self.screen_rects if _rect.is_interactive]
+        for _object in objects_to_update:
+            _object.handle_key(Event)
+
+        # window specific updates
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                return Switch()
 
     def time_updates(self):
         pass

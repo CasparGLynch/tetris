@@ -16,13 +16,8 @@ class Main:
         self.clock = pygame.time.Clock()
         self.is_running = True
 
-        # all the windows that the main loop will switch between
-        # Todo: Add the classes
-        self.windows = {'main_menu': MainMenuWindow,
-                        'game_window': GameWindow}
-
         # first window is main menu
-        self.current_window = self.windows['main_menu']()
+        self.current_window = MainMenuWindow()
 
         # pygame screen and display initialising
         self.screen = pygame.display.set_mode(size=(screen_width, screen_height))
@@ -39,7 +34,10 @@ class Main:
                 if event.type == pygame.QUIT:
                     self.is_running = False
                 # screen event handling
-                self.current_window.key_updates(event=event)
+                event = self.current_window.key_updates(event=event)
+                if event is not None:
+                    self.screen.fill(background_color)
+                    self.current_window = GameWindow()
             # screen timing based updates
             self.current_window.time_updates()
 
