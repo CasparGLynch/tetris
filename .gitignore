@@ -3,3 +3,4 @@ __pycache__/
 objects/__pycache__/
 utils/__pycache__/
 windows/__pycache__/
+venv/
