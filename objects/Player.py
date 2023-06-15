@@ -10,7 +10,7 @@ class Player(Object):
 
     def __init__(self, position: Position, center: bool = False):
         self.size = defs.screen_width // 8
-        image = pygame.image.load('sprites/player.png')
+        image = pygame.image.load(defs.player_sprite)
         self.moving_right = image.convert_alpha()
         image = pygame.transform.flip(image, True, False)
         self.moving_left = image.convert_alpha()
@@ -79,10 +79,14 @@ class Player(Object):
             elif self.velocity_y < -0.4:
                 self.velocity_y += 0.4
 
-        if (-0.45 < self.velocity_y < 0.45) and (keys_y == 0):
+        if (-0.5 < self.velocity_y < 0.5) and (keys_y == 0):
             self.velocity_y = 0
-        if (-0.45 < self.velocity_x < 0.45) and (keys_x == 0):
+        if (-0.5 < self.velocity_x < 0.5) and (keys_x == 0):
             self.velocity_x = 0
+
+        if (self.velocity_x + self.velocity_y == 0) and (keys_x == 0) and (keys_y == 0):
+            self.update = False
+            return
         new_position = Position(self.position.x + self.velocity_x, self.position.y + self.velocity_y)
         self.update_rect_new_position(new_position)
         self.update = True

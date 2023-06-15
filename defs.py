@@ -3,7 +3,8 @@ screen_width = 800
 background_color = (91, 91, 255)
 player_color = (255, 0, 0)
 text_color = (0, 0, 0)
-game_font = 'fonts/Big Pixel demo.otf'
+game_font = 'assets/fonts/Big Pixel demo.otf'
+player_sprite = 'assets/sprites/player.png'
 
 number_of_mines = {
     'easy': 10,

@@ -18,7 +18,8 @@ class MainMenuWindow(Window):
 
     def __init__(self):
         super().__init__()
-
+        background = pygame.image.load('assets/backgrounds/menu.jpg')
+        self.background = pygame.transform.scale(background, (defs.screen_width, defs.screen_height))
         main_menu = TextBoxObject(
             position=Position(x=screen_width//2, y=screen_height//2),
             text='Press Enter to Play!',

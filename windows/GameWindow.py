@@ -1,5 +1,9 @@
 from typing import List
+
+import pygame.image
 from pygame.event import Event
+
+import defs
 from objects.Object import Object
 from objects.Player import Player
 from windows.Window import Window
@@ -9,6 +13,8 @@ class GameWindow(Window):
 
     def __init__(self):
         super().__init__()
+        background = pygame.image.load('assets/backgrounds/level1.jpg')
+        self.background = pygame.transform.scale(background, (defs.screen_width, defs.screen_height))
         main_menu = Player(position=None, center=True)
         self.screen_rects.append(main_menu)
 

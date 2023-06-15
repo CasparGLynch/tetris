@@ -26,7 +26,7 @@ class Main:
         self.display.set_caption('Simple Tetris')
 
     def run(self):
-        self.screen.fill(background_color)
+        self.screen.blit(self.current_window.background, (0, 0))
         self.display.flip()
         while self.is_running:
             self.clock.tick(self.__frame_rate)
@@ -47,7 +47,7 @@ class Main:
                 rect = element.rect
                 surface = element.get_surface()
                 rect_to_update = element.get_rect_to_updated()
-                self.screen.fill(background_color, rect_to_update)
+                self.screen.blit(self.current_window.background.subsurface(rect_to_update), rect_to_update)
                 self.screen.blit(surface, (rect.x, rect.y))
                 self.display.update(rect_to_update)
 
@@ -57,8 +57,9 @@ class Main:
     def handle_event(self, event_code):
         match event_code:
             case defs.SWITCH_TO_GAME:
+                # insert background
                 self.current_window = GameWindow()
-                self.screen.fill(defs.background_color)
+                self.screen.blit(self.current_window.background, (0, 0))
                 self.display.flip()
             case _:
                 return
