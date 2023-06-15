@@ -10,8 +10,7 @@ class Player(Object):
 
     def __init__(self, position: Position, center: bool = False):
         self.size = defs.screen_width // 8
-        player_surface = pygame.Surface((self.size, self.size))
-        player_surface.fill(defs.player_color)
+        player_surface = pygame.image.load('sprites/player.png').convert_alpha()
         player_rect = player_surface.get_rect()
 
         if center:
