@@ -46,4 +46,7 @@ class Object:
         if not self.is_interactive:
             return self.rect
         else:
-            return self.previous_rect
+            return self.previous_rect.union(self.rect)
+
+    def get_surface(self):
+        return self.surface

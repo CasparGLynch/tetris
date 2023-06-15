@@ -45,7 +45,7 @@ class Main:
             # loop to update all areas that require it in screen
             for element in self.current_window.display():
                 rect = element.rect
-                surface = element.surface
+                surface = element.get_surface()
                 rect_to_update = element.get_rect_to_updated()
                 self.screen.fill(background_color, rect_to_update)
                 self.screen.blit(surface, (rect.x, rect.y))
