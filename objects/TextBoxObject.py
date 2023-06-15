@@ -8,12 +8,14 @@ from utils.Position import Position
 
 
 class TextBoxObject(Object):
-    is_interactive = False
-    def __init__(self, position: Position, text: str, size: int, center=False):
+
+    def __init__(self, position: Position, text: str, size: int, center=False, is_interactive: bool = False):
         self.font = pygame.font.Font(game_font, size)
         text_surface = self.font.render(text, True, text_color)
         text_rect = text_surface.get_rect()
         self.center = center
+
+        # added quick way of putting text in the center
         if center:
             text_rect.y = (screen_height // 2) - (text_rect.height // 2)
             text_rect.x = (screen_width // 2) - (text_rect.width // 2)

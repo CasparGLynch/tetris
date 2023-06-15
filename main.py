@@ -31,11 +31,13 @@ class Main:
         while self.is_running:
             self.clock.tick(self.__frame_rate)
             # event handling
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+            for pygame_event in pygame.event.get():
+                if pygame_event.type == pygame.QUIT:
                     self.is_running = False
                 # screen event handling
-                self.handle_event(self.current_window.key_updates(event=event))
+                event = self.current_window.key_updates(event=pygame_event)
+                if event:
+                    self.handle_event(event)
 
 
             # screen timing based updates
@@ -53,11 +55,13 @@ class Main:
             print('Main game loop exited')
 
     def handle_event(self, event_code):
-        if event_code is None:
-            return
-        if event_code == defs.SWITCH_TO_GAME:
-            self.current_window = GameWindow()
-            self.screen.fill(defs.background_color)
+        match event_code:
+            case defs.SWITCH_TO_GAME:
+                self.current_window = GameWindow()
+                self.screen.fill(defs.background_color)
+                self.display.flip()
+            case _:
+                return
 
 
 if __name__ == '__main__':

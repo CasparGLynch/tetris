@@ -31,12 +31,14 @@ class MainMenuWindow(Window):
         # check for the rects on screem
         objects_to_update = [_rect for _rect in self.screen_rects if _rect.is_interactive]
         for _object in objects_to_update:
-            _object.handle_key(Event)
+            _object.handle_key(event)
 
         # window specific updates
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 return defs.SWITCH_TO_GAME
+
+        return 0
 
     def time_updates(self):
         pass

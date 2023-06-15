@@ -1,11 +1,7 @@
 from typing import List
-
 from pygame.event import Event
-
-from defs import screen_width, screen_height
 from objects.Object import Object
-from objects.TextBoxObject import TextBoxObject
-from utils.Position import Position
+from objects.Player import Player
 from windows.Window import Window
 
 
@@ -13,19 +9,22 @@ class GameWindow(Window):
 
     def __init__(self):
         super().__init__()
-        main_menu = TextBoxObject(
-            position=Position(x=screen_width // 2, y=screen_height // 2),
-            text='You are Play ing~!!',
-            size=23,
-            center=True
-        )
+        main_menu = Player(position=None, center=True)
         self.screen_rects.append(main_menu)
 
     def key_updates(self, event: Event):
-        pass
+        objects_to_update = [_rect for _rect in self.screen_rects if _rect.is_interactive]
+        for _object in objects_to_update:
+            _object.handle_key(event)
+
+        return 0
 
     def time_updates(self):
-        pass
+        objects_to_update = [_rect for _rect in self.screen_rects if _rect.is_interactive]
+        for _object in objects_to_update:
+            _object.time_update()
+
+        return 0
 
     def display(self) -> List[Object]:
         to_be_updated = [x for x in self.screen_rects if x.update]
