@@ -32,6 +32,7 @@ class Object:
         """
         new_rect = self.surface.get_rect()
         new_rect.center = (new_position.x, new_position.y)
+        self.previous_rect = self.rect
         self.rect = new_rect
         self.position = new_position
 
@@ -42,7 +43,7 @@ class Object:
         pass
 
     def get_rect_to_updated(self):
-        if self.is_interactive:
+        if not self.is_interactive:
             return self.rect
         else:
-            return self.rect + self.previous_rect
+            return self.previous_rect

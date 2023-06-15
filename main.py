@@ -39,7 +39,6 @@ class Main:
                 if event:
                     self.handle_event(event)
 
-
             # screen timing based updates
             self.current_window.time_updates()
 
@@ -47,9 +46,10 @@ class Main:
             for element in self.current_window.display():
                 rect = element.rect
                 surface = element.surface
-                self.screen.fill(background_color, rect)
+                rect_to_update = element.get_rect_to_updated()
+                self.screen.fill(background_color, rect_to_update)
                 self.screen.blit(surface, (rect.x, rect.y))
-                self.display.update(rect)
+                self.display.update(rect_to_update)
 
         else:
             print('Main game loop exited')
